@@ -19,7 +19,7 @@ class HomeController extends Controller
         $data['user'] = $this->get_info();
         //$userList = Admin::where('name','=','Nuzaifa')
         //->get(); // for all with where
-        $data['userList'] = Admin::all(); // all from database
+        $data['userList'] = Admin::latest()->paginate(2); // all from database
         //$userList = Admin::where('name','=','Nuzaifa') ->firstOrFail();
         // $data['userList'] = $userList;
   
@@ -143,9 +143,8 @@ class HomeController extends Controller
             'email' => $request->post('email'),
             'status' => 1,
         ]);
-    
-
-        return redirect('/frontend');
+        return redirect('/frontend')->with('successMsg','Created Success');    
+        // return redirect('/frontend');
     }
 
     /**
@@ -167,6 +166,11 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
+        $user = Admin::find($id);
+        $data = [];
+        $data['user'] = $user;
+        $data['page_title'] = 'Contact';
+        return view('frontend.edit',['data'=>$data]);
         //
     }
 
@@ -179,7 +183,14 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Admin::where('id',$id)
+        ->update([
+            'name' => $request->post('name'),
+            'username' => $request->post('username'),
+            'email' => $request->post('email'),
+            'status' => 1,
+        ]);
+        return redirect('/frontend')->with('successMsg','Created Success');   
     }
 
     /**
@@ -190,6 +201,9 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $user->delete();
+        Admin::destroy($id);
+        return back()->with('successMsg','Delete Success');
+        // return redirect('/frontend');
     }
 }

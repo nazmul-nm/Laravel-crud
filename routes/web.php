@@ -20,6 +20,15 @@ use App\Http\Controllers\HomeController;
 
 
 // Route::get('/home',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('frontend');
+
+
+
 Route::get('/about-us',[HomeController::class,'about'])->name('about-us');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+
+
+
+Route::get('/destroy/{id}',[HomeController::class,'destroy']);
+
 Route::resource('/frontend', HomeController::class);
