@@ -24,6 +24,10 @@ Route::get('/',[HomeController::class,'index'])->name('frontend');
 
 
 
+Route::get('/get-comments/{id}',[HomeController::class,'getCommentsByPost']);
+
+
+
 Route::get('/about-us',[HomeController::class,'about'])->name('about-us');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 

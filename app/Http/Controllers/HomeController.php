@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use App\Models\Users;
+use App\Models\UserInformation;
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
@@ -13,19 +16,36 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function getCommentsByPost($id){
+        // $comments = Post::find($id);
+        // $comments = $comments->comments;
+        // return $comments;
+        
+        
+         $post = Users::find($id);
+         $comments = $post->user;
+         return $comments;
+     }
+     
+     
+     
+     
+     
+     
+     
     public function index()
     {
         $data = [];
         $data['page_title'] = 'Home';
         $data['user'] = $this->get_info();
-        //$userList = Admin::where('name','=','Nuzaifa')
+        //$userList = Users::where('name','=','Nuzaifa')
         //->get(); // for all with where
-        $data['userList'] = Admin::latest()->paginate(2); // all from database
-        //$userList = Admin::where('name','=','Nuzaifa') ->firstOrFail();
+        $data['userList'] = Users::latest()->paginate(2); // all from database
+        //$userList = Users::where('name','=','Nuzaifa') ->firstOrFail();
         // $data['userList'] = $userList;
   
 
-        // $userList = Admin::chunk(2, function($userList){
+        // $userList = Users::chunk(2, function($userList){
         //     foreach($userList as $user){
         //         print_r($user);
         //     }
@@ -138,7 +158,7 @@ class HomeController extends Controller
         // $user ->status = 1;
         // $user->save();
         
-        $user = Admin::create([
+        $user = Users::create([
             'name' => $request->post('name'),
             'username' => $request->post('username'),
             'email' => $request->post('email'),
@@ -156,7 +176,8 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = Users::find($id);
+        return view('frontend.singlePage')->with('users',$users);
     }
 
     /**
@@ -167,7 +188,7 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        $user = Admin::find($id);
+        $user = Users::find($id);
         $data = [];
         $data['user'] = $user;
         $data['page_title'] = 'Contact';
@@ -184,7 +205,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Admin::where('id',$id)
+        $user = Users::where('id',$id)
         ->update([
             'name' => $request->post('name'),
             'username' => $request->post('username'),
@@ -203,7 +224,7 @@ class HomeController extends Controller
     public function destroy($id)
     {
         // $user->delete();
-        Admin::destroy($id);
+        Users::destroy($id);
         return back()->with('successMsg','Delete Success');
         // return redirect('/frontend');
     }

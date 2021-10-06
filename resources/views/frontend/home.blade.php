@@ -46,8 +46,9 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item['username']}}</td>
                         <td>{{$item['email']}}</td>
-                        <td><a href="/frontend/{{$item->id}}/edit" class="btn btn-primary">Edit</a> </td>
-                        <td><a href="/destroy/{{$item->id}}" class="btn btn-danger">Delete</a> </td>
+                        <td><a href="/frontend/{{$item->id}}" class="btn btn-secondary">View</a> 
+                        <a href="/frontend/{{$item->id}}/edit" class="btn btn-primary">Edit</a> 
+                        <a href="/destroy/{{$item->id}}" class="btn btn-danger">Delete</a> </td>
                     </tr>
                     @endforeach
                 </tbody>
