@@ -5,24 +5,32 @@
         <div class="col-md-6">
             <div class="card bg-light">
                 <article class="card-body mx-auto">
-                    <h4 class="card-title mt-3 text-center">Create Account</h4>
+                    <h4 class="card-title mt-3 text-center">Add  User Information</h4>
                     <p class="text-center">Get started with your free account</p>
-                    <form method="POST" action="/frontend">
+                    <form method="POST" action="/insert-user-info">
                         @csrf
 
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                          </div>
-                        <input name="name" class="form-control" placeholder="Full name" type="text">
+                        <select name="user_id" id="" class="form-control">
+                            @forelse ($data['userList'] as $user)
+                              <option value="{{ $user['id'] }}"> {{ $user->name }} </option>
+                            @empty
+                                <option value="">Not found</option>
+                            @endforelse
+                        </select>
                     </div> <!-- form-group// -->
                     
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                          </div>
-                        <input name="email" class="form-control" placeholder="Email address" type="text">
-                    </div> <!-- form-group// -->                         
+                        <input name="address" class="form-control" placeholder="Address" type="text">
+                    </div> <!-- form-group// -->
+                    
+                                        
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
                     </div> <!-- form-group// -->      

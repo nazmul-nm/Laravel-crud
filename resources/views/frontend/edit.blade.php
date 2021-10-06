@@ -20,12 +20,7 @@
                         <input name="name" class="form-control" placeholder="Full name" type="text" value="{{$user->name}}">
                     </div> <!-- form-group// -->
                     
-                    <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                         </div>
-                        <input name="username" class="form-control" placeholder="Full name" type="text" value="{{$user->username}}">
-                    </div> <!-- form-group// -->
+                    
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>

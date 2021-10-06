@@ -21,12 +21,16 @@
                     </button>
                 </div>
             @endif
-            
+       
             <div class="mt-10 mb-5">
                 <a href="frontend/create" class="btn btn-primary">Add New Users</a>
+                <a href="/add-userinfo" class="btn btn-secondary">Add User Details</a>
             </div>
         </div>
     </div>
+    {{-- @php
+        echo "<pre>"; print_r($data['details']->address);exit();
+    @endphp --}}
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered ">
@@ -34,8 +38,8 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Username</th>
                         <th>Email</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -44,8 +48,14 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item['username']}}</td>
                         <td>{{$item['email']}}</td>
+                        <td>
+                            @forelse ($item['userdetails'] as $ad)
+                                <span>{{ $ad->address }}</span>,
+                            @empty
+                                Not Found
+                            @endforelse
+                        </td>
                         <td><a href="/frontend/{{$item->id}}" class="btn btn-secondary">View</a> 
                         <a href="/frontend/{{$item->id}}/edit" class="btn btn-primary">Edit</a> 
                         <a href="/destroy/{{$item->id}}" class="btn btn-danger">Delete</a> </td>

@@ -31,6 +31,12 @@ Route::get('/get-comments/{id}',[HomeController::class,'getCommentsByPost']);
 Route::get('/about-us',[HomeController::class,'about'])->name('about-us');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
+Route::get('/add-userinfo',[HomeController::class,'adduserinfo'])->name('adduserinfo');
+
+//insert user details
+Route::post('/insert-user-info',[HomeController::class,'insert_user_info'])->name('insert-user-info');
+Route::get('/getUser/{id}',[HomeController::class,'getUser'])->name('getUser');
+
 
 
 Route::get('/destroy/{id}',[HomeController::class,'destroy']);
